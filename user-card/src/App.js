@@ -1,26 +1,42 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import axios from 'axios';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import UserCard from './components/UserCard'
+
+class App extends React.Component {
+  constructor() {//initialize state
+    super();//call super and bind methods
+    this.state = {
+      cardInfo: [],
+      followersInfo: [],
+      query: ""
+    };
+    console.log("constructor is running");
+  }
+  componentDidMount() {//fetch initial data and sets it to state
+    axios
+    .get("https://api.github.com/users/acarrillo3")
+    .then(response => {
+      this.setState({
+        cardInfo: response.data
+      });
+      console.log(response)
+    })
+    .catch(error => console.log(error));
+  }
+  
+  render() {
+    console.log("Loading", this.state);
+    return (
+      <div>
+        <UserCard 
+          cardInfo={this.state.cardInfo}
+        />
+      </div>
+    );
+  }
+    
+
 }
 
 export default App;
