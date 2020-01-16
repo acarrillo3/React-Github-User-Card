@@ -6,7 +6,7 @@ const UserCard = props => {
     return (
         <>
             <div>
-                <div>
+                <div style={{borderBottom:"solid black 2px"}}>
                     <img src={cardInfo.avatar_url} />
                     <h2>{cardInfo.name}</h2>
                     <h3>@{cardInfo.login}</h3>
@@ -16,13 +16,13 @@ const UserCard = props => {
                     <p>Following: {cardInfo.following}</p>
                     <p>Bio: {cardInfo.bio}</p>
                 </div>
-                <div>
+                <div >
                     <h2>{cardInfo.name}'s Follower's</h2>
                     {followers.map((follower, index) => {
                         return (
                             <div key={index}>
                                 <img src={follower.avatar_url} alt="user avatar" />
-                                <p>@{follower.login}</p>
+                                <h3>@{follower.login}</h3>
                                 <p>Profile: <a href={follower.html_url}>{follower.html_url}</a></p>
                             </div> 
                         );

@@ -34,11 +34,36 @@ class App extends React.Component {
       .catch(error => console.log(error));
   }
   
+  handleChanges = element => {
+    this.setState({query: element.target.value});
+  };
+
+  filterUsers = element => {
+    element.preventDefault();
+    const results = this.state.followersInfo.filter(user => 
+      user.toLowerCase().includes(this.query.toLowerCase())
+    );
+    this.setState({ followersInfo:results });
+  };
+
   render() {
     console.log("Loading", this.state);
     return (
-      <div>
-        <UserCard 
+      <div style={{background: "skyblue", margin: "30%" }}>
+        <h1>Welcome to my GitHub and Follower's</h1>
+        <p>Feel free to search thru</p>
+        <form>
+            <input onSubmit="submit"
+              id="name"
+              onChange={this.handleChanges}
+              value={this.filterUsers}
+              placeholder="Search..."
+              type="text"
+              name="textfield"
+            />
+            <button>submit</button>
+        </form>
+        <UserCard
           cardInfo={this.state.cardInfo}
           followers={this.state.followersInfo}
         />
