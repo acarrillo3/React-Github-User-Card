@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 
 const UserCard = props => {
     const { cardInfo, followers } = props;
@@ -12,11 +11,22 @@ const UserCard = props => {
                     <h2>{cardInfo.name}</h2>
                     <h3>@{cardInfo.login}</h3>
                     <p>Location: {cardInfo.location}</p>
-                    <p>Profile: </p>
-                    <a href={cardInfo.html_url}>{cardInfo.html_url}</a>
+                    <p>Profile: <a href={cardInfo.html_url}>{cardInfo.html_url}</a></p>
                     <p>Followers: {cardInfo.followers}</p>
                     <p>Following: {cardInfo.following}</p>
                     <p>Bio: {cardInfo.bio}</p>
+                </div>
+                <div>
+                    <h2>{cardInfo.name}'s Follower's</h2>
+                    {followers.map((follower, index) => {
+                        return (
+                            <div key={index}>
+                                <img src={follower.avatar_url} alt="user avatar" />
+                                <p>@{follower.login}</p>
+                                <p>Profile: <a href={follower.html_url}>{follower.html_url}</a></p>
+                            </div> 
+                        );
+                    })}
                 </div>
             </div>
         </>

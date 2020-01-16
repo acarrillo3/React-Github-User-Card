@@ -15,14 +15,23 @@ class App extends React.Component {
   }
   componentDidMount() {//fetch initial data and sets it to state
     axios
-    .get("https://api.github.com/users/acarrillo3")
-    .then(response => {
-      this.setState({
-        cardInfo: response.data
-      });
-      console.log(response)
-    })
-    .catch(error => console.log(error));
+      .get("https://api.github.com/users/acarrillo3")
+      .then(response => {
+        this.setState({
+          cardInfo: response.data
+        });
+        console.log(response)
+      })
+      .catch(error => console.log(error));
+    axios
+      .get("https://api.github.com/users/acarrillo3/followers")
+      .then(response => {
+        this.setState({
+          followersInfo: response.data
+        });
+        console.log("followers", response);
+      })
+      .catch(error => console.log(error));
   }
   
   render() {
@@ -31,12 +40,11 @@ class App extends React.Component {
       <div>
         <UserCard 
           cardInfo={this.state.cardInfo}
+          followers={this.state.followersInfo}
         />
       </div>
     );
   }
-    
-
 }
 
 export default App;
